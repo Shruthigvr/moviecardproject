@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Movie Site!</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="css\style.css">
+</head>
+<body>
+	<div class="main">
+		
+		<div id="top-head">
+		</div>
+		<br>
+		<div class="topnav">
+  		 	<input type="text" placeholder="Search.." onkeyup="searchMovie()" value="" name="search" id="search">
+		</div>
+		<div id="listdiv">
+		</div>
+	</div>
+<script>
+	 // Retrieveing username from login page
+	var user = window.location.href;
+	var u = new URL(user);
+	var userMail=u.searchParams.get("username");
+	document.getElementById("top-head").innerHTML= '<div id="new">'+userMail+'</div>';
+
+	localStorage.setItem('movieDetails', JSON.stringify([
+		{title:"Sudani from Nigeria",director:"Zakariya",stars:"Soubin Shahir,\
+		 Samuel Abiola Robinson, Savithri Sredharan, Sarasa Balussery",rating:
+		 8.3,review:"Story of an African football player and a local football club\
+		  manager from Malappuram, Kerala.",image:"images/sudani.jpg"},
+		{title:"Ee. Ma. Yau",director:"Lijo Jose Pellissery",stars:"  Chemban \
+		Vinod Jose, Vinayakan, Dileesh Pothan, Kainakary Thankaraj",rating:8.4,review:"Set in Chellanam, Kochi, the story of Ee. Ma. Yau revolves around the death of Vavachan Mesthiri in a coastal village. It showcases the events that unfold between two evenings and looks at death from different perspectives.",image:"images/emayu.jpg"},
+		{title:"Carbon",director:"Venu Goopaalan",stars:"Fahadh Faasil, Mamta Mohandas, Manikandan R. Achari, Chethan Jayalal",rating:6.9,review:"Sibi Sebastian and his never ending struggle to make it big in life, his quest for new horizons and opportunities. While others pass by, his relentless determination takes him to the most unexpected situation in his life.",image:"images/carbon.jpg"},
+		{title:"Eeda",director:"Ajithkumar",stars:"Shane Nigam, Nimisha Sajayan, Surabhi Lakshmi, Alencier Ley Lopez",rating:7.3,review:"Anand and Aiswarya who hail from nearby villages in North Malabar. A chance meeting in their native place develops into a passionate affair in Mysore. But their lives suddenly become intertwined in a series of violent events.",image:"images/eeda.jpg"},
+		{title:"Poomaram",director:"Abrid Shine",stars:"Kalidas Jayaram, Kunchacko Boban, Neeta Pillai, Meera Jasmine",rating:6.9,review:"A war waged between two colleges at the youth festival, with Goutham (Kalidas Jayaram) leading the Maharaja's college to regain their lost glory from the all-time winners, the St. Teresa's college led by Irene (Neetha Pillai).",image:"images/poomaram.jpg"},
+		{title:"Aami",director:"Kamal",stars:"Manju Warrier, Murali Gopy, Tovino Thomas, Anoop Menon",rating:6.5,review:"The biopic on iconic Kerala writer Kamala Das alias Kamala Surayya alias Madhavikutty.",image:"images/aami.jpg"},
+		{title:"Aanakallan",director:"Suresh Divakar ",stars:" Biju Menon, Siddique, Suraaj Venjarammoodu, Saikumar",rating:5.5,review:"A Police Officer seeks a conman's help to solve a murder conspiracy.",image:"images/aana.jpg"}]));
+
+	var movieListArray=JSON.parse(localStorage.getItem('movieDetails'));
+	// console.log(movieListArray);
+	var divContent = "";
+	// Function to display movie card
+	for(var i = 0 ; i< movieListArray.length; i++){
+	 	divContent = divContent +
+	 	'<div class="moviecard"  onclick="review(' + i + ')" id="moviecard' + i + '">\
+	 		<div id="imageDiv">\
+	 			<img src="' + movieListArray[i]["image"] + '">\
+	 		</div>\
+	 		<div>\
+	 			<h3>' + movieListArray[i]["title"] + '</h3>\
+	 		</div>\
+	 		<div>\
+	 			<h5>' + movieListArray[i]["rating"] + '/10</h5>\
+	 		</div>\
+	 	</div>';
+	 }
+	 document.getElementById('listdiv').innerHTML = divContent;
+
+	 //Function to pass values via URL
+	 function review(i){
+			var movieName = movieListArray[i]["title"];
+			var review = movieListArray[i]["review"];
+			var director=movieListArray[i]["director"];
+			var stars=movieListArray[i]["stars"];
+			var img=movieListArray[i]["image"];
+			window.location.href = "review.html?movieName="+movieName+"&review="+
+			review+"&username="+userMail+"&director="+director+"&stars="+stars;
+
+		}
+	//Function to search movies by name
+	function searchMovie(){
+				// alert("hii");
+				//console.log(event.target.value);
+				
+				var divContent = "";
+				var SearchString = document.getElementById("search").value;
+				var flag=0;
+				//alert(SearchString);
+				for (var i = 0; i < movieListArray.length; i++) {
+					var movie = movieListArray[i]["title"];
+					if (movie.search(SearchString)>=0) {
+						flag=1;
+						divContent = divContent + 
+						'<div\
+						 	class="moviecard"  onclick="review(' + i + ')" id="moviecard' + i + '">\
+						 	<div id="imageDiv">\
+						 		<img src="' + movieListArray[i]["image"] + '">\
+						 	</div>\
+						 	<div>\
+						 		<h3>' + movieListArray[i]["title"] + '</h3>\
+						 	</div>\
+						 	<div>\
+						 		<h5>' + movieListArray[i]["rating"] + '/10</h5>\
+						 	</div>\
+						 </div>';
+						}
+					}
+				//Error message for unmatched results
+				if(flag==0)
+					document.write("Sorry!! No movie found....");
+				//Matched search results
+				document.getElementById('listdiv').innerHTML = divContent;
+			}
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+
+#content{
+	max-width:60%;
+	max-height: auto;
+	margin :30px auto;
+	background: beige;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  	
+}
+#item{
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: auto;
+    margin: 0px;
+    font-size: 1.5vw;
+    text-align: right;
+}
+
+#title{
+	font-size: 2vw;
+	text-align: center;
+	font-weight: bold;
+	padding: 10px;
+}
+
+#data{
+	font-size: 1.5vw;
+	text-align: justify;
+	padding: 10px;
+}
+
+#star{
+	font-size: 1.2vw;
+	text-align: left;
+	padding: 10px;
+}
+#director{
+	font-size: 1.2vw;
+	text-align: justify;
+	padding: 10px;
+	float: right;
+}

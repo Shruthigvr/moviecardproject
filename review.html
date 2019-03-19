@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Movie Review</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="css\revstyle.css">	
+</head>
+<body>
+	<div id="item">
+	</div>
+	<div id="content">
+		<div id="title">
+		</div>
+		<div>
+			<h4 id="director"></h4>
+		</div>
+		<div>
+			<h4 id="star"></h4>
+		</div>
+		<div id="data">
+			
+		</div>
+	</div>
+<script>
+	 // Retrieveing username from Home page
+	var rev = window.location.href;
+	var u = new URL(rev);
+	var userMail=u.searchParams.get("username");
+	var movieTitle=u.searchParams.get("movieName");
+	var director=u.searchParams.get("director");
+	var stars=u.searchParams.get("stars");
+	var movieReview=u.searchParams.get("review");
+	// var movieImage=u.searchParams.get("img");
+	document.getElementById("item").innerHTML= userMail;
+	document.getElementById("title").innerHTML= movieTitle;
+	document.getElementById("director").innerHTML='Director: '+director ;
+	document.getElementById("star").innerHTML= 'Stars: '+stars;
+	document.getElementById("data").innerHTML= movieReview;
+	document.getElementById("img").innerHTML= movieImage;
+</script>
+</html>

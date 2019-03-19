@@ -1,0 +1,22 @@
+html, body{
+	height:100%;
+	background: black;
+}
+.heading{
+	text-align: center;
+	color:white;
+
+}
+
+.main-contaniner{
+	display:table;
+	height:100%;
+	margin: 200px auto;
+
+}
+
+.sub-container{
+	display:table-cell;
+	vertical-align:middle;
+	margin:30px;
+}	
